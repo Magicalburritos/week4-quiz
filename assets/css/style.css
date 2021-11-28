@@ -1,16 +1,24 @@
-.code-challange {
-  position: absolute;
-  left: 50%;
-  top: 30%;
-  transform: translate(-50%, -50%);
-  padding: 10px;
-  text-align: center;
+* {
+  box-sizing: border-box;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-#myBtn {
-  background-color: blue;
-  color: cornsilk;
-  width: 100px;
-  height: 45px;
-  border-radius: 25px;
+body {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.hide {
+  display: none;
 }

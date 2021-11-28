@@ -10,16 +10,21 @@
 </head>
 
 <body>
-    <div class="code-challange">
-        <h1>Coding Quiz Challenge</h1>
-        <h2>Try to answer the following javaScript questions whithin the time limit keep in mind that incorrect answers
-            will
-            penalize your score/time by 10 seconds!</h2>
-        <button type="button" id="myBtn" onclick="myFunction()">Start Quiz</button>
-    </div>
-    <main>
-    </main>
-    <script src="./assets/js/script.js"></script>
+    <div class="container">
+        <div id="question-container" class="hide">
+            <div id="question">Question</div>
+            <div id='answer-buttons' class="btn-grid">
+                <button class="btn">answer 1</button>
+                <button class="btn">answer 1</button>
+                <button class="btn">answer 1</button>
+                <button class="btn">answer 1</button>
+            </div>
+        </div>
+        <div class="controls">
+            <button id="start-btn" class="start-btn btn">start</button>
+            <button id="next-btn" class="next-btn btn hide">next</button>
+        </div>
+        <script src="./assets/js/script.js"></script>
 </body>
 
 </html>
