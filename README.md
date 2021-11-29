@@ -5,7 +5,7 @@
  able to add more questions as time goes on.
   
  THNINGS TO DO!
- (there is no end to this at the moment)
+ (there is no end to this at the moment !!!THERE ARE ONLY 3 QUESTION!!! )
  add a leaderboard
  add a end game function
  make it so when timer is out the game ends 
