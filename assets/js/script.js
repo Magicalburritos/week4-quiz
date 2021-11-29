@@ -56,23 +56,44 @@ function selectAnswer(e) {
   }
 }
 
-function setStatusClass(element, correct) {
-  clearStatusClass(element);
-  if (correct) {
-    element.classList.add('correct');
-  } else {
-    element.classList.add('wrong');
+// scoreboard
+var endGame = function () {
+  window.alert("The game has now ended. Let's see how you did!");
+
+  var highScore = localStorage.getItem('highscore');
+  if (highScore === null) {
+    highScore = 0;
   }
-}
-function clearStatusClass(element) {
-  element.classList.remove('correct');
-  element.classList.remove('wrong');
-}
+
+  if (playerInfo.money > highScore) {
+    localStorage.setItem('highscore');
+    localStorage.setItem('name');
+
+    alert(playerInfo.name + ' now has the high score of ' + countdown + '!');
+  } else {
+    alert(
+      playerInfo.name +
+        ' did not beat the high score of ' +
+        highScore +
+        '. Maybe next time!'
+    );
+  }
+
+  var playAgainConfirm = window.confirm('Would you like to play again?');
+
+  if (playAgainConfirm) {
+    startGame();
+  } else {
+    window.alert('Thanks for playing!');
+  }
+};
+
+// questions and answers
 
 const questions = [
   {
     question:
-      'string values must be enclosed within ___ when being assigned to variables',
+      'String values must be enclosed within ___ when being assigned to variables',
     answers: [
       { text: 'commas', correct: false },
       { text: 'curly brackets', correct: true },
@@ -80,4 +101,43 @@ const questions = [
       { text: 'parenthesis', correct: false },
     ],
   },
+
+  {
+    question:
+      'Which of the following type of variable is visible everywhere in your JavaScript code?',
+    answers: [
+      { text: 'global variable', correct: true },
+      { text: 'local variable', correct: false },
+      { text: 'both', correct: false },
+      { text: 'none', correct: false },
+    ],
+  },
+  {
+    question:
+      'Which built-in method calls a function for each element in the array?',
+    answers: [
+      { text: 'while()', correct: false },
+      { text: 'loop()', correct: false },
+      { text: 'forEach()', correct: true },
+      { text: 'none of the above', correct: false },
+    ],
+  },
 ];
+
+// timer
+const startingMinutes = 1;
+let time = startingMinutes * 60;
+
+const countdownEl = document.getElementById('countdown');
+setInterval(updateCountdown, 1000);
+
+function updateCountdown() {
+  const minutes = Math.floor(time / 60);
+  let seconds = time % 60;
+
+  seconds = seconds < 10 ? '0' + seconds : seconds;
+
+  countdownEl.innerHTML = `${minutes}: ${seconds}`;
+  time--;
+  time = time < 0 ? 0 : time;
+}

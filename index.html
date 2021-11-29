@@ -10,7 +10,9 @@
 </head>
 
 <body>
-
+    <div>
+        <p id="countdown"></p>
+    </div>
     <div class="container">
         <div id="question-container" class="hide">
             <div id="question">Question</div>
@@ -22,10 +24,17 @@
             </div>
         </div>
         <div class="controls">
-            <button id="start-btn" class="start-btn btn">start</button>
-            <button id="next-btn" class="next-btn btn hide">next</button>
-        </div>
-        <script src="./assets/js/script.js"></script>
+            <div>
+                <h2 id="start-txt" class="start-txt txt">Try to answer the following JavaScript questions within the
+                    time
+                    limit. Keep in mind
+                    you will loose
+                    time/score for every wrong anwser by 10 seconds! </h2>
+                <button id="start-btn" class="start-btn btn">start</button>
+                <div>
+                    <button id="next-btn" class="next-btn btn hide">next</button>
+                </div>
+                <script src="./assets/js/script.js"></script>
 </body>
 
 </html>

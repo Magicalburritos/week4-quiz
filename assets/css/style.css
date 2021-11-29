@@ -1,5 +1,4 @@
 * {
-  box-sizing: border-box;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
@@ -18,7 +17,18 @@ body {
   display: grid;
   gap: 20px;
 }
-
+.controls h2 {
+  font-size: larger;
+  justify-content: center;
+  display: flex;
+  text-align: center;
+}
+#button {
+  justify-content: center;
+}
 .hide {
   display: none;
+}
+p {
+  float: right;
 }
