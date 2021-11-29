@@ -23,8 +23,11 @@ body {
   display: flex;
   text-align: center;
 }
-#button {
-  justify-content: center;
+.answer-btn {
+  width: 10%;
+}
+.btn {
+  width: 25%;
 }
 .hide {
   display: none;

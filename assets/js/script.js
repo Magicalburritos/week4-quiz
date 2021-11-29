@@ -1,41 +1,49 @@
 const startButton = document.getElementById('start-btn');
-const nextButton = document.getElementById('next-btn');
 const questionContainerElement = document.getElementById('question-container');
 const questionElement = document.getElementById('question');
 const answerButtonsElement = document.getElementById('answer-buttons');
-
-let shuffledQuestions, currentQuestionIndex;
-
+const startText = document.getElementById('start-txt');
+let currentQuestionIndex;
+const startingMinutes = 1;
+let time = startingMinutes * 60;
+const countdownEl = document.getElementById('countdown');
+let previous;
 startButton.addEventListener('click', startGame);
 
 function startGame() {
   startButton.classList.add('hide');
-  shuffledQuestions = questions.sort(() => Math.random() - 0.5);
-  currentQuestionIndex = 0;
+  startText.style.display = 'none';
+  updateCountdown;
+  setInterval(updateCountdown, 1000);
   questionContainerElement.classList.remove('hide');
   setNextQuestion();
 }
 
 function setNextQuestion() {
-  resetState();
-  showQuestion(shuffledQuestions[currentQuestionIndex]);
+  while (previous === currentQuestionIndex) {
+    currentQuestionIndex = Math.floor(Math.random() * questions.length);
+  }
+
+  previous = currentQuestionIndex;
+  showQuestion(questions[currentQuestionIndex]);
 }
 
 function showQuestion(question) {
+  resetState();
   questionElement.innerText = question.question;
   question.answers.forEach((answer) => {
     const button = document.createElement('button');
     button.innerText = answer.text;
     button.classList.add('btn');
     if (answer.correct) {
-      button.dataset.correct = answer.correct;
+      button.classList.add('correct');
     }
     button.addEventListener('click', selectAnswer);
     answerButtonsElement.appendChild(button);
   });
 }
+
 function resetState() {
-  nextButton.classList.add('hide');
   while (answerButtonsElement.firstChild) {
     answerButtonsElement.removeChild(answerButtonsElement.firstChild);
   }
@@ -43,50 +51,14 @@ function resetState() {
 
 function selectAnswer(e) {
   const selectedButton = e.target;
-  const correct = selectedButton.dataset.correct;
-  setStatusClass(document.body, correct);
-  Array.from(answerButtonsElement.children).forEach((button) => {
-    setStatusClass(button, button.dataset.correct);
-  });
-  if (shuffledQuestions.length > currentQuestionIndex + 1) {
-    nextButton.classList.remove('hide');
+  const correctAnwser = selectedButton.classList.contains('correct');
+
+  if (correctAnwser === true) {
+    setNextQuestion();
   } else {
-    startButton.innerText = 'Restart';
-    startButton.classList.remove('hide');
+    time -= 10;
   }
 }
-
-// scoreboard
-var endGame = function () {
-  window.alert("The game has now ended. Let's see how you did!");
-
-  var highScore = localStorage.getItem('highscore');
-  if (highScore === null) {
-    highScore = 0;
-  }
-
-  if (playerInfo.money > highScore) {
-    localStorage.setItem('highscore');
-    localStorage.setItem('name');
-
-    alert(playerInfo.name + ' now has the high score of ' + countdown + '!');
-  } else {
-    alert(
-      playerInfo.name +
-        ' did not beat the high score of ' +
-        highScore +
-        '. Maybe next time!'
-    );
-  }
-
-  var playAgainConfirm = window.confirm('Would you like to play again?');
-
-  if (playAgainConfirm) {
-    startGame();
-  } else {
-    window.alert('Thanks for playing!');
-  }
-};
 
 // questions and answers
 
@@ -101,7 +73,6 @@ const questions = [
       { text: 'parenthesis', correct: false },
     ],
   },
-
   {
     question:
       'Which of the following type of variable is visible everywhere in your JavaScript code?',
@@ -125,12 +96,6 @@ const questions = [
 ];
 
 // timer
-const startingMinutes = 1;
-let time = startingMinutes * 60;
-
-const countdownEl = document.getElementById('countdown');
-setInterval(updateCountdown, 1000);
-
 function updateCountdown() {
   const minutes = Math.floor(time / 60);
   let seconds = time % 60;
